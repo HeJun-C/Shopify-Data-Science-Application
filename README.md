@@ -4,7 +4,7 @@
 
 ### a. Think about what could be going wrong with our calculation. Think about a better way to evaluate this data.
 
-    We got the AOV of $3145.13 because we mistakenly used the COUNT() function in Excel for the total_items column, which gave us 5000. Given the sum of total orders is $15725640, if we calculate $15725640/5000, we get $3145.13, the wrong number. Instead, if we apply the SUM() function for the total_items column, we get 43936, which is the correct number for total items.
+   We got the AOV of $3145.13 because we mistakenly used the COUNT() function in Excel for the total_items column, which gave us 5000. Given the sum of total orders is $15725640, if we calculate $15725640/5000, we get $3145.13, the wrong number. Instead, if we apply the SUM() function for the total_items column, we get 43936, which is the correct number for total items.
 
 ### b. What metric would you report for this dataset?
 
@@ -27,6 +27,7 @@
 
     Answer:
     54
+    
     Queries:
     SELECT COUNT(OrderID) AS total_SE_orders
     FROM Orders o LEFT JOIN Shippers s
@@ -37,6 +38,7 @@
 
     Answer:
     Last Name: Peacock; Order Numbers: 40
+    
     Queries:
     SELECT e.LastName, COUNT(OrderID) as order_num
     FROM Orders o LEFT JOIN Employees e
