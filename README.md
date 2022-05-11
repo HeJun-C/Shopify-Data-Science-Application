@@ -25,44 +25,44 @@
 
 ### How many orders were shipped by Speedy Express in total?
 
-Answer:
-54
-Queries:
-SELECT COUNT(OrderID) AS total_SE_orders
-FROM Orders o LEFT JOIN Shippers s
-ON o.ShipperID = s.ShipperID
-WHERE ShipperName = 'Speedy Express';
+    Answer:
+    54
+    Queries:
+    SELECT COUNT(OrderID) AS total_SE_orders
+    FROM Orders o LEFT JOIN Shippers s
+    ON o.ShipperID = s.ShipperID
+    WHERE ShipperName = 'Speedy Express';
 
 ### What is the last name of the employee with the most orders?
 
-Answer:
-Last Name: Peacock; Order Numbers: 40
-Queries:
-SELECT e.LastName, COUNT(OrderID) as order_num
-FROM Orders o LEFT JOIN Employees e
-ON o.EmployeeID = e.EmployeeID
-GROUP BY LastName
-ORDER BY COUNT(OrderID) DESC LIMIT 1;
+    Answer:
+    Last Name: Peacock; Order Numbers: 40
+    Queries:
+    SELECT e.LastName, COUNT(OrderID) as order_num
+    FROM Orders o LEFT JOIN Employees e
+    ON o.EmployeeID = e.EmployeeID
+    GROUP BY LastName
+    ORDER BY COUNT(OrderID) DESC LIMIT 1;
 
 ### What product was ordered the most by customers in Germany?
 
-Answer:
-Product: Boston Crab Meat; Total Ordered Quantity:160
+    Answer:
+    Product: Boston Crab Meat; Total Ordered Quantity:160
 
-Queries:
-WITH t1 AS 
-(SELECT o.OrderID, c.country 
- FROM Orders o LEFT JOIN Customers c
- ON o.CustomerID = c.CustomerID)
+    Queries:
+    WITH t1 AS 
+    (SELECT o.OrderID, c.country 
+     FROM Orders o LEFT JOIN Customers c
+     ON o.CustomerID = c.CustomerID)
  
- SELECT p.ProductName, SUM(Quantity) AS total_orders
- FROM 
- (SELECT t1.OrderId, t1.country, od.ProductID, od.Quantity
- FROM t1 LEFT JOIN OrderDetails od 
- ON t1.OrderID = od.OrderID) AS t2 LEFT JOIN Products p
- ON t2.ProductID = p.ProductID
- WHERE t2.country = 'Germany'
- GROUP BY ProductName
- ORDER BY SUM(Quantity) DESC LIMIT 1;
+     SELECT p.ProductName, SUM(Quantity) AS total_orders
+     FROM 
+     (SELECT t1.OrderId, t1.country, od.ProductID, od.Quantity
+     FROM t1 LEFT JOIN OrderDetails od 
+     ON t1.OrderID = od.OrderID) AS t2 LEFT JOIN Products p
+     ON t2.ProductID = p.ProductID
+     WHERE t2.country = 'Germany'
+     GROUP BY ProductName
+     ORDER BY SUM(Quantity) DESC LIMIT 1;
 
 
